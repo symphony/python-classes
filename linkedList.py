@@ -30,27 +30,25 @@ class LinkedList:
             newNode.next = node.next
             node.next = newNode
 
-        self.size += 1
-        return self.size
+        return ++self.size
 
     def delete(self, index: int):
+        node = self.start
+
         # delete beginning
         if index == 0:
-            self.start == self.start.next
+            self.start = node.next
 
         # delete at index
         else:
-            node = self.start
-
             for i in range(index - 1):
                 node = node.next
 
-            toDelete = node.next
-            node.next = toDelete.next
-            toDelete.next = None
-            self.size -= 1
+            node.next = node.next.next
 
-        return self.size
+        # unlink deleted node
+        node.next = None
+        return --self.size
 
     def get(self, index: int):
         node = self.start
