@@ -9,58 +9,61 @@ class LinkedList:
         self.start = start
         self.size = 1
 
-    def add(self, data, index: int = None):
+    def add(self, data, pos: int = None):
         node = self.start
         newNode = Node(data)
 
         # append to end
-        if index == None:
+        if pos == None:
             while node.next != None:
                 node = node.next
             node.next = newNode
 
         # add to beginning
-        elif index == 0:
+        elif pos == 0:
             newNode.next = node
             self.start = newNode
 
-        # add at index
+        # add at position
         else:
-            node = self.get(index-1)
+            node = self.get(pos-1)
             newNode.next = node.next
             node.next = newNode
 
-        return ++self.size
+        self.size += 1
+        return self.size
 
-    def delete(self, index: int):
-        node = self.start
+    def delete(self, pos: int):
+        toDelete = self.start
 
         # delete beginning
-        if index == 0:
-            self.start = node.next
+        if pos == 0:
+            self.start = toDelete.next
 
-        # delete at index
+        # delete at position
         else:
-            for i in range(index - 1):
+            for i in range(pos - 1):
                 node = node.next
 
-            node.next = node.next.next
+            toDelete = node.next
+            node.next = toDelete.next
 
         # unlink deleted node
-        node.next = None
-        return --self.size
+        toDelete.next = None
+        self.size -= 1
+        return self.size
 
-    def get(self, index: int):
+    def get(self, pos: int):
         node = self.start
 
         # get from end of list
-        if index < 0:
-            for i in range(max(0, self.size + index)):
+        if pos < 0:
+            for i in range(max(0, self.size + pos)):
                 node = node.next
 
-        # return node from index
+        # return node from pos
         else:
-            for i in range(min(index, self.size)):
+            for i in range(min(pos, self.size-1)):
                 node = node.next
 
         return node
@@ -81,4 +84,5 @@ l.add('first', 0)
 l.add('fourth', 4)
 l.printAll()
 
-# print(l.get(-5555).val)
+print(l.get(444444).val)
+print(l.get(-255).val)
