@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, data) -> None:
-        self.val = data
-        self.next = None
+        self.val: any = data
+        self.next: Node = None
 
 
 class LinkedList:
@@ -10,25 +10,25 @@ class LinkedList:
         self.size = 1
 
     def add(self, data, index: int = None):
-        # add to beginning
-        if index == 0:
-            node = Node(data)
-            node.next = self.start
-            self.start = node
+        node = self.start
+        newNode = Node(data)
 
         # append to end
-        elif index == None:
-            node = self.start
-
+        if index == None:
             while node.next != None:
                 node = node.next
+            node.next = newNode
 
-            node.next = Node(data)
+        # add to beginning
+        elif index == 0:
+            newNode.next = node
+            self.start = newNode
 
         # add at index
         else:
-            node = LinkedList.get(index - 1)
-            node.next = data
+            node = self.get(index-1)
+            newNode.next = node.next
+            node.next = newNode
 
         self.size += 1
         return self.size
@@ -52,24 +52,35 @@ class LinkedList:
 
         return self.size
 
-    def get(self, index: int = None):
+    def get(self, index: int):
         node = self.start
 
-        # print all nodes in list
-        if index == None:
-            for i in range(self.size):
-                print('%i: %s' % (i, node.val))
+        # get from end of list
+        if index < 0:
+            for i in range(max(0, self.size + index)):
                 node = node.next
-            return
 
-        for i in range(index):
-            node = node.next
+        # return node from index
+        else:
+            for i in range(min(index, self.size)):
+                node = node.next
 
         return node
+
+    def printAll(self):
+        node = self.start
+        for i in range(self.size):
+            print('%i: %s' % (i, node.val))
+            node = node.next
+        print()
 
 
 l = LinkedList(Node(5))
 l.add('hello')
 l.add('hi')
 l.add('what\'s up')
-l.get()
+l.add('first', 0)
+l.add('fourth', 4)
+l.printAll()
+
+# print(l.get(-5555).val)
