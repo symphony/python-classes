@@ -1,34 +1,41 @@
 class Node:
     def __init__(self, data) -> None:
-        self.data = data
+        self.val = data
         self.next = None
 
 
 class LinkedList:
     def __init__(self, start: Node) -> None:
         self.start = start
+        self.length = 0
 
-    def add(self, index: int, data):
+    def add(self, data, index: int):
+
         # add to beginning
         if index == 0:
             node = Node(data)
             node.next = self.start
             self.start = node
+
+        # append to end
+        elif index == None:
+            node = self.start
+            while node.next != None:
+                node = node.next
+            node.next = Node(data)
+
         # add at index
         else:
             node = LinkedList.get(index - 1)
             node.next = data
-
-    def append(self, data):
-        node = self.start
-        while node.next != None:
-            node = node.next
-        node.next = Node(data)
+        self.length += 1
+        return self.length
 
     def delete(self, index: int):
         # delete beginning
         if index == 0:
             self.start == self.start.next
+
         # delete at index
         else:
             node = self.start
@@ -38,6 +45,8 @@ class LinkedList:
             toDelete = node.next
             node.next = toDelete.next
             toDelete.next = None
+            self.length -= 1
+        return self.length
 
     def get(self, index: int):
         node = self.start
@@ -46,4 +55,5 @@ class LinkedList:
         return node
 
 
-n1 = Node(5)
+list = LinkedList(Node(5))
+print(list.start.val)
