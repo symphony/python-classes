@@ -42,7 +42,7 @@ class LinkedList:
 
         # delete at position
         else:
-            for i in range(pos - 1):
+            for i in range(pos-1):
                 node = node.next
 
             toDelete = node.next
@@ -81,7 +81,8 @@ l.add('hello')
 l.add('hi')
 l.add('what\'s up')
 l.add('first', 0)
-l.add('fourth', 4)
+print(l.add('last', 36))
+l.add('fourth', 3)
 l.printAll()
 
 print(l.get(444444).val)
