@@ -26,11 +26,9 @@ class Camera(SecurityDevice):
         self.type = type
 
     def aboutCamera(self):
-        print(
-            'Serial: ', self.serial,
-            'Positon:', self.position.getPosition(),
-            '\nCamera Type: ', self.type,
-        )
+        print('Serial: ', self.serial,
+              'Positon:', self.position.getPosition(),
+              '\nCamera Type: ', self.type,)
 
     class CameraType(Enum):
         a: 1
