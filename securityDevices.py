@@ -30,7 +30,7 @@ class Camera(SecurityDevice):
               'Positon:', self.position.getPosition(),
               '\nCamera Type: ', self.type,)
 
-    class CameraType(Enum):
+    class CameraType(Enum): # TODO: fix enum
         a: 1
         b: 2
         c: 3
